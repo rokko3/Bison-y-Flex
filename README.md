@@ -72,3 +72,6 @@ cc lex.yy.c -lfl
 ```
 
 1. Corremos el programa producido
+```bash
+./a.out
+```
