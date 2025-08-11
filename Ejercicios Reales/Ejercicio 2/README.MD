@@ -78,6 +78,7 @@ Escribimos las relgas lexicas con flex:
 .      { printf("Carater no reconocido: %c\n", *yytext); }
 
 %%
+int yywrap(void){return 1;}
 ```
 
 Ejecutamos el código y ingresamos un input:
