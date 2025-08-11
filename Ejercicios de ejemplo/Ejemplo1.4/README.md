@@ -55,4 +55,4 @@ Ejecutamos el código y ingresamos un input:
 
 ![alt text](image.png)
 
-Este codigo en flex sirve para leer una expresion que tiene dos numeros y un operador (como suma, resta, multiplicacion o division). El programa revisa el caracter del operador y si es uno de los validos (+, -, *, /), lo imprime. Si el usuario ingresa un caracter que no es un operador valido, el programa muestra un mensaje diciendo que el caracter no es valido. Asi, solo acepta los operadores basicos y rechaza cualquier otro simbolo.
+Este programa en flex reconoce numeros y operadores basicos (+, -, *, /, !) en una linea de texto. Cuando escribes un numero, lo convierte a entero y lo imprime junto con el token correspondiente. Si escribes un operador valido, imprime el token correspondiente (ADD, SUB, MUL, DIV, ABS). Si escribes un caracter que no es valido (como una letra o simbolo raro), el programa muestra un mensaje diciendo que es un "Mystery character"
