@@ -1,0 +1,3 @@
+# Lenguajes en donde flex no serviria como una buena herramienta para escribir un scanner
+---
+Flex no seria una herramienta adecuada para escribir un analizador lexico de lenguajes cuya sintaxis dependa en que requieran analisis lexico y sintactico altamente entrelazado. Por ejemplo, lenguajes como Python, donde la indentacion y el conteo de espacios en blanco afectan directamente la estructura del codigo, o lenguajes con reglas complejas de resolucion de simbolos que no pueden describirse facilmente con expresiones regulares puras. En estos casos, un escaneo basado solo en patrones regulares no es suficiente y se requiere una combinacion mas estrecha entre el analizador lexico y el parser.

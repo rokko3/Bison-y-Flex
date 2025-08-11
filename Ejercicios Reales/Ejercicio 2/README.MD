@@ -82,11 +82,6 @@ Escribimos las relgas lexicas con flex:
 
 Ejecutamos el código y ingresamos un input:
 
-![alt text](image.png)
+![alt text](image-2.png)
 
-En esta imagen vemos que si ingresamos un numero en hexadecimal (0x...) y realizamos operaciones entre si, el programa muestra el valor y el resultado de la operacion, tanto en valor decimal como en hexadecimal. Cabe recalcar que tambien reconoce expresiones en mayusculas o en minisculas, como es en el caso de 0xf y 0xF.
-
-![alt text](image-1.png)
-
-Si aplicamos la division, vemos que tambien aplica la regla de la division por 0 y si es valida la operacion, muestra en decimal y en hexadecimal.
-
+Como vemos, con la agregacion de importancia en el bison, prioriza el token de ABS y permite realizar las operaciones entre diferentes compuertas logicas, lo que hace bison por debajo de la ejecucion, es convertir los decimales en bits para realizar las compuertas logicas correspondientes, luego los vuelve a decimales y los imprime. 
