@@ -1,4 +1,4 @@
-# Ejercicio 2
+# Ejercicio 3
 
 Escribimos las reglas gramaticales con bison, agregamos nuevos tokens en base a la calculadora anterior y actualizamos la gramatica para las compuertas AND, OR y el operador ABS
 ```bash
