@@ -28,7 +28,6 @@ int main(int argc, char **argv)
 ```
 
 Ejecutamos el código de compilacion e ingresamos un input :
-![Ejecucion]
-(image.png)
+![Ejecucion](image.png)
 
 Como vemos, el programa da como salida: lineas, palabras, caracteres. Siendo la cantidad de lineas 3, palabras 12 y caracteres 63. Este programa puede ser utilizado para verificar la cantidad de palabras y caracteres en un archivo, como lo puede ser un bloc de notas o word.
