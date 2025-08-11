@@ -29,7 +29,7 @@ int yylval; /* Permite la obtencion de un valor entero, para realizar operacione
 .      { printf("Mystery character %c\n", *yytext); }
 
 %%
-
+int yywrap(void){return 1;}
 int main(int argc, char **argv) {
     int tok;
     
