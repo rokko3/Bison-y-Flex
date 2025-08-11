@@ -13,3 +13,5 @@ void yyerror(const char *s)
     fprintf(stderr, "error: %s\n", s);
 }
 ```
+## Ejemplo de output con un caracter de comentario
+![alt text](image.png)
