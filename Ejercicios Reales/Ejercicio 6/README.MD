@@ -105,7 +105,9 @@ int main(int argc, char **argv) {
     
     return 0;
 }
+
 ```
+## Comparacion
 ![alt text](image.png)
 
-## Comparacion
+
