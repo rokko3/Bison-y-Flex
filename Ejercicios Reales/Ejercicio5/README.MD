@@ -1,22 +1,3 @@
-## Pregunta 4: ¿El scanner manual del Ejemplo 1-4 reconoce los mismos tokens que la versión Flex?
-
-Para determinar si ambas implementaciones reconocen exactamente los mismos tokens, debemos considerar varios aspectos técnicos:
-
-1. **Patrones de reconocimiento**:
-   - El scanner generado por Flex utiliza expresiones regulares definidas en el archivo .l, lo que garantiza un reconocimiento preciso y consistente de tokens según los patrones especificados.
-   - El scanner manual, al estar implementado directamente en código C, podría presentar variaciones en cómo identifica ciertos patrones, especialmente en casos complejos.
-
-2. **Manejo de casos especiales**:
-   - Para números negativos, Flex puede reconocer "-8" como un solo token (NUMBER con valor -8) si así está definido.
-   - En cambio, el scanner manual podría interpretar esto como dos tokens separados (SUB seguido de NUMBER 8), dependiendo de su implementación.
-
-3. **Tokens complejos**:
-   - Flex maneja de forma nativa números hexadecimales (como 0xFF) cuando se incluye el patrón correspondiente.
-   - Un scanner manual requeriría código adicional específico para reconocer este formato correctamente.
-
-4. **Consistencia en el manejo de espacios y caracteres especiales**:
-   - Flex proporciona un manejo uniforme de espacios en blanco y caracteres no reconocidos a través de sus reglas.
-   - La versión manual podría tener un comportamiento diferente según cómo el programador haya implementado estas características.
-
-Conclusión:
-Aunque ambos scanners pueden diseñarse para reconocer el mismo conjunto básico de tokens, es probable que existan diferencias sutiles en su comportamiento, especialmente en casos complejos o con entradas no estándar. La equivalencia exacta dependerá de qué tan cuidadosamente se haya implementado el scanner manual para replicar todos los patrones y casos especiales definidos en la versión Flex.
+# Lenguajes en donde flex no serviria como una buena herramienta para escribir un scanner
+---
+Flex no seria una herramienta adecuada para escribir un analizador lexico de lenguajes cuya sintaxis dependa en que requieran analisis lexico y sintactico altamente entrelazado. Por ejemplo, lenguajes como Python, donde la indentacion y el conteo de espacios en blanco afectan directamente la estructura del codigo, o lenguajes con reglas complejas de resolucion de simbolos que no pueden describirse facilmente con expresiones regulares puras. En estos casos, un escaneo basado solo en patrones regulares no es suficiente y se requiere una combinacion mas estrecha entre el analizador lexico y el parser.
