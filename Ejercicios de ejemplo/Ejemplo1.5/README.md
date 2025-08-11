@@ -16,23 +16,60 @@ Una expresion BNF se compone de los siguientes aspectos:
 * Terminales (tokens o palabras)
 * Reglas (instrucciones dadas por ::=)
 
-Escribimos el codigo usando nano y escribiendo linea por linea:
+Escribimos el codigo para el compilador de bison:
+
+```bash
+/* simplest version of calculator */
+%{
+#include <stdio.h>
+%}
+
+/* declare tokens */
+%token NUMBER
+%token ADD SUB MUL DIV ABS
+%token EOL
+
+%%
+
+callist: /* nothing */
+    | callist exp EOL { printf("= %d\n", $1); } /* matches at beginning of input, EOL is end of an expression */
+;
+
+exp: factor                { $$ = $1; }
+    | exp ADD factor       { $$ = $1 + $3; }
+    | exp SUB factor       { $$ = $1 - $3; }
+;
+
+factor: term               { $$ = $1; }
+      | factor MUL term    { $$ = $1 * $3; }
+      | factor DIV term    { $$ = $1 / $3; }
+;
+
+term: NUMBER               { $$ = $1; }
+    | ABS term             { $$ = $2 >= 0 ? $2 : -$2; }
+;
+
+%%
+
+main(int argc, char **argv)
+{
+    yyparse();
+}
+
+yyerror(char *s)
+{
+    fprintf(stderr, "error: %s\n", s);
+}
+
+```
+
+Escribimos el codigo de Flex, incluyendo la libreria .h que genera el compilador de bison:
 
 ```bash
 /* recognize tokens for the calculator and print them out */
 %{
 #include <stdlib.h>
-/* Incluimos la libreria porque tiene metodos de parseo de enteros a string (atoi, atol, strol)*/
-
-enum yytokentype { /* enumeracion para darle un valor entero a varibles*/
-    NUMBER = 258,
-    ADD = 259,
-    SUB = 260,
-    MUL = 261,
-    DIV = 262,
-    ABS = 263,
-    EOL = 264
-};
+#include "ejemplo1.5.tab.h"
 
 int yylval; /* Permite la obtencion de un valor entero, para realizar operaciones*/
 %}
@@ -51,22 +88,7 @@ int yylval; /* Permite la obtencion de un valor entero, para realizar operacione
 
 %%
 
-int main(int argc, char **argv) {
-    int tok;
-    
-    while(tok = yylex()) { /* realiza una asignacion de variables, mientras que se pueda asignar se repite el bucle*/
-        printf("%d", tok);
-        if(tok == NUMBER)
-            printf(" = %d\n", yylval);
-        else
-            printf("\n");
-    }
-    
-    return 0;
-}
-
 ```
-
 Ejecutamos el código y ingresamos un input:
 
 ![alt text](image.png)
