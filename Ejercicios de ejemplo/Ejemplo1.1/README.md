@@ -27,7 +27,11 @@ int main(int argc, char **argv)
 }
 ```
 
-Ejecutamos el código de compilacion e ingresamos un input :
+Ejecutamos el código de compilacion:
+
+![text](image-1.png)
+
+Ingresamos un input:
 
 ![Ejecucion](image.png)
 
