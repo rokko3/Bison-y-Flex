@@ -110,4 +110,25 @@ int main(int argc, char **argv) {
 ## Comparacion
 ![alt text](image.png)
 
+El conteo difiere debido a los paradigmas de implementación:
 
+1. Flex
+   - Usa una definición lingüística estricta de "palabra":
+   - Ventaja: Precisión para idiomas (reconoce tildes, ñ)
+   - Limitación: Ignora números y símbolos por diseño
+
+2. **Enfoque de C** (Programación Imperativa)
+   - Define palabras como secuencias entre delimitadores:
+     ```c
+     isspace(c) || c == ',' || c == '.'
+     ```
+   - Ventaja: Flexibilidad para formatos arbitrarios
+   - Limitación: Requiere manualización de reglas complejas
+
+## Casos de Estudio
+
+| Texto de Entrada     | Flex | C  | Explicación                     |
+|----------------------|------|----|---------------------------------|
+| "2023"               | 0    | 1  | Flex ignora números             |
+| "ciencia-ficción"    | 1    | 2  | C divide por guión no declarado |
+| "¡Hola!"             | 1    | 1  | Flex omite signos de puntuación |
