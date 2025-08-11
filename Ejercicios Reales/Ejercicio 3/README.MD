@@ -93,9 +93,7 @@ Escribimos las relgas lexicas con flex:
 ```
 
 Ejecutamos el código y ingresamos un input:
-
 ![alt text](image.png)
-
 En esta imagen vemos que si ingresamos un numero en hexadecimal (0x...) y realizamos operaciones entre si, el programa muestra el valor y el resultado de la operacion, tanto en valor decimal como en hexadecimal. Cabe recalcar que tambien reconoce expresiones en mayusculas o en minisculas, como es en el caso de 0xf y 0xF.
 
 ![alt text](image-1.png)
