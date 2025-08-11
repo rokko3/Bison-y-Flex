@@ -11,7 +11,7 @@ clock_t start, end;
 .                    { char_count++; }
 \n                   { char_count++; }
 %%
-
+int yywrap(void){return 1;}
 int main(int argc, char **argv) {
     if (argc < 2) {
         fprintf(stderr, "Uso: %s <archivo>\n", argv[0]);
