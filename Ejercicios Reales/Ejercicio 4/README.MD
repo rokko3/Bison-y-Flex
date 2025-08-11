@@ -17,3 +17,6 @@ Para determinar si ambas implementaciones reconocen exactamente los mismos token
 4. **Consistencia en el manejo de espacios y caracteres especiales**:
    - Flex proporciona un manejo uniforme de espacios en blanco y caracteres no reconocidos a través de sus reglas.
    - La versión manual podría tener un comportamiento diferente según cómo el programador haya implementado estas características.
+
+Conclusión:
+Aunque ambos scanners pueden diseñarse para reconocer el mismo conjunto básico de tokens, es probable que existan diferencias sutiles en su comportamiento, especialmente en casos complejos o con entradas no estándar. La equivalencia exacta dependerá de qué tan cuidadosamente se haya implementado el scanner manual para replicar todos los patrones y casos especiales definidos en la versión Flex.
