@@ -3,12 +3,12 @@
 # BNF
 El BNF consta de una funcionalidad semantica validas para un lenguaje de programacion.
 Si lo comparamos con el español: "Una oracion es valida si tiene un sujeto, un verbo y un objeto".
-
+```bash
 <Oracion> ::= <Sujeto> <Verbo> <Objeto>  
 <Sujeto>  ::= "El estudiante" | "La pizza"  
 <Verbo>   ::= "come" | "programa"  
 <Objeto>  ::= "codigo" | "carbohidratos"  
-
+```
 De esta manera podemos crear una oracion: "El estudiante come carbohidratos".
 ---
 Una expresion BNF se compone de los siguientes aspectos:
