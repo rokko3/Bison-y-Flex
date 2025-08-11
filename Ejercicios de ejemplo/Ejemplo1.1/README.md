@@ -28,6 +28,7 @@ int main(int argc, char **argv)
 ```
 
 Ejecutamos el código de compilacion :
+![alt text](image.png)
 
 ![image.png](attachment:8b2d5774-f852-41b2-9f44-edf99c75c99f:image.png)
 
