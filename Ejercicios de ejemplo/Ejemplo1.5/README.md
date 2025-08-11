@@ -19,9 +19,12 @@ Una expresion BNF se compone de los siguientes aspectos:
 Escribimos el codigo para el compilador de bison:
 
 ```bash
-/* simplest version of calculator */
 %{
 #include <stdio.h>
+
+/* Declaraciones explícitas para evitar warnings */
+int yylex(void);
+void yyerror(const char *s);
 %}
 
 /* declare tokens */
@@ -31,32 +34,41 @@ Escribimos el codigo para el compilador de bison:
 
 %%
 
-callist: /* nothing */
-    | callist exp EOL { printf("= %d\n", $1); } /* matches at beginning of input, EOL is end of an expression */
+calclist: /* nothing */
+    | calclist exp EOL { printf("= %d\n", $2); }
 ;
 
-exp: factor                { $$ = $1; }
-    | exp ADD factor       { $$ = $1 + $3; }
-    | exp SUB factor       { $$ = $1 - $3; }
+exp: factor          { $$ = $1; }
+    | exp ADD factor { $$ = $1 + $3; }
+    | exp SUB factor { $$ = $1 - $3; }
 ;
 
-factor: term               { $$ = $1; }
-      | factor MUL term    { $$ = $1 * $3; }
-      | factor DIV term    { $$ = $1 / $3; }
+factor:
+        term                 { $$ = $1; }
+        | factor MUL term    { $$ = $1 * $3; }
+        | factor DIV term    { 
+                                if ($3 == 0) {
+                                    yyerror("division por cero");
+                                    $$ = 0;
+                                } else {
+                                    $$ = $1 / $3;
+                                }
+                              }
 ;
 
-term: NUMBER               { $$ = $1; }
-    | ABS term             { $$ = $2 >= 0 ? $2 : -$2; }
+term: NUMBER        { $$ = $1; }
+    | ABS term      { $$ = $2 >= 0 ? $2 : -$2; }
 ;
 
 %%
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     yyparse();
+    return 0;
 }
 
-yyerror(char *s)
+void yyerror(const char *s)
 {
     fprintf(stderr, "error: %s\n", s);
 }
@@ -66,31 +78,37 @@ yyerror(char *s)
 Escribimos el codigo de Flex, incluyendo la libreria .h que genera el compilador de bison:
 
 ```bash
-/* recognize tokens for the calculator and print them out */
 %{
+#include <stdio.h>
 #include <stdlib.h>
-#include "ejemplo1.5.tab.h"
-
-int yylval; /* Permite la obtencion de un valor entero, para realizar operaciones*/
+#include "ejemplo.tab.h"   /* generado por Bison; contiene definiciones de tokens y de yylval */
 %}
 
 %%
-
 "+"    { return ADD; }
 "-"    { return SUB; }
 "*"    { return MUL; }
 "/"    { return DIV; }
 "!"    { return ABS; }
-[0-9]+ { yylval = atoi(yytext); return NUMBER; } /* Convierte el string ingresado a entero usando (atoi) luego retorna el valor de NUMBER*/
+[0-9]+ { yylval = atoi(yytext); return NUMBER; }
 \n     { return EOL; }
-[ \t]  { /* ignore whitespace */ }
-.      { printf("Mystery character %c\n", *yytext); }
-
+[ \t]  { /* ignorar espacios */ }
+.      { printf("Mystery character %s\n", yytext); }
 %%
+/* yywrap para no ingresar la flag -lfl*/
+int yywrap(void) {
+    return 1;
+}
+
+
 
 ```
 Ejecutamos el código y ingresamos un input:
 
 ![alt text](image.png)
 
-Este programa en flex reconoce numeros y operadores basicos (+, -, *, /, !) en una linea de texto. Cuando escribes un numero, lo convierte a entero y lo imprime junto con el token correspondiente. Si escribes un operador valido, imprime el token correspondiente (ADD, SUB, MUL, DIV, ABS). Si escribes un caracter que no es valido (como una letra o simbolo raro), el programa muestra un mensaje diciendo que es un "Mystery character"
+Como vemos, el programa reconoce la divsion por 0 e muestra por pantalla que no se puede realizar, para las demas operaciones como suma, resta y multiplicacion da el resultado de la operacion aritmetica.
+
+![alt text](image-1.png)
+
+Si se ingresa un caracter no valido, como lo es en lenguaje natural, muestra en pantalla el caracter que no es valido (codigo hecho en el .l) y produce un error de syntaxis, (error producido por el parser)
